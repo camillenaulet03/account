@@ -1,5 +1,9 @@
 <?php
 
+class Transaction {
+        private $label;
+        private $montant;
+}
 ?><!doctype html>
 <html lang="an">
 <head>
@@ -11,7 +15,7 @@
         <table>
             <tbody>
                 <tr>
-                    <td><input type="text" name="libellé" placeholder="Libellé" /></td>
+                    <td><input type="text" name="label" placeholder="Label" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="montant" placeholder="Montant" /></td>
