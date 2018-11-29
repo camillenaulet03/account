@@ -24,27 +24,19 @@ $password = '';
         try
         {
         $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
-        $stmt = $pdo->prepare("SELECT * FROM users");
-        $stmt->execute();
-        while($users = $stmt->fetch()) {
-            //var_dump($users['id']);
-            //var_dump($users['label']);
-            //var_dump($users['montant']);
-            foreach($users as $cle=>$valeur){
-                //echo $cle.' : '.$valeur.'<br>';
-                $id = $users['id'];
-                $label = $users['label'];
-                $montant = $users['montant'];
-                //var_dump($users);
-            };
+        $reponse = $pdo->query("SELECT * FROM users");
+        while ($donnees = $reponse->fetch()) {
 
-        }
+
         ?>
             <tr>
-                <td><?php echo $id;?></td>
-                <td><?php echo $label;?></td>
-                <td><?php echo $montant;?></td>
+                <td><?php echo $donnees[id];?></td>
+                <td><?php echo $donnees[label];?></td>
+                <td><?php echo $donnees[montant];?></td>
             </tr>
+            <?php }
+            $reponse->closeCursor();
+        ?>
         </tbody>
     </table>
 </body>
