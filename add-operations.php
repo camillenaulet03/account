@@ -15,15 +15,13 @@ $montant=(isset($_POST["montant"])) ? $_POST["montant"]:false;
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
     //var_dump($pdo);
-    $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (?,?);');
-    $stmt->bindParam(1, $label, PDO::PARAM_STR);
-    $stmt->bindParam(2, $montant, PDO::PARAM_STR);
-    $label = "vgj";
-    $montant = "ghj";
+    $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (:label, :montant);');
+    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
+    $stmt->bindParam(':montant', $montant, PDO::PARAM_STR);
     $stmt->execute();
-    var_dump($stmt);
-    while($user = $stmt->fetch()) {
-        var_dump($user['label']);
+    //var_dump($stmt);
+    while($users = $stmt->fetch()) {
+        //var_dump($users['label']);
     }
 } catch (PDOException $e) {
     //var_dump($e->getMessage());
