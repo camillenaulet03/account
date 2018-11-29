@@ -30,17 +30,15 @@ $password = '';
             //var_dump($users['id']);
             //var_dump($users['label']);
             //var_dump($users['montant']);
-            $users = $stmt->fetchObject();
-            $id = $users->id;
-            $label = $users->label;
-            $montant = $users->montant;
-            //var_dump($id);
+            foreach($users as $cle=>$valeur){
+                //echo $cle.' : '.$valeur.'<br>';
+                $id = $users['id'];
+                $label = $users['label'];
+                $montant = $users['montant'];
+                //var_dump($users);
+            };
+
         }
-        //$users = $stmt->fetchObject();
-        //$id = $users['id'];
-        //$label = $users['label'];
-        //$montant = $users['montant'];
-        //var_dump($id);
         ?>
             <tr>
                 <td><?php echo $id;?></td>
