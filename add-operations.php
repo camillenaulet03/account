@@ -9,18 +9,21 @@ $port = 3306;
 $database = 'test';
 $login = 'root';
 $password = '';
+
+$label=(isset($_POST["label"])) ? $_POST["label"]:false;
+$montant=(isset($_POST["montant"])) ? $_POST["montant"]:false;
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
     //var_dump($pdo);
-    $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (?,?,?);');
-    $stmt->bindParam($label, $montant, PDO::PARAM_STR);
-    $stmt->bindParam($label, $montant, PDO::PARAM_STR);
-    $label = $label[$i];
-    $montant = $montant[$i];
+    $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (?,?);');
+    $stmt->bindParam(1, $label, PDO::PARAM_STR);
+    $stmt->bindParam(2, $montant, PDO::PARAM_STR);
+    $label = "vgj";
+    $montant = "ghj";
     $stmt->execute();
-    //var_dump($stm);
-    while($user = $stm->fetch()) {
-        //var_dump($user['label']);
+    var_dump($stmt);
+    while($user = $stmt->fetch()) {
+        var_dump($user['label']);
     }
 } catch (PDOException $e) {
     //var_dump($e->getMessage());
