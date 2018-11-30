@@ -1,5 +1,15 @@
 <?php
-//lien de la page d'accueil vers une autre page (opération)
-//opération lien vers la page d'accueil + lien add (ajouter une nouvelle opération (libellé + un + ou -)
-//opération id libellé et montant
-//transaction (libellé et le montant)
+    session_start();
+?><!DOCTYPE.html>
+<html lang="en">
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div align ="center">
+        <h1>Accéder Au Opérations</h1>
+        <button><a href="operations.php">Opérations</a></button>
+    </div>
+</body>
+</html>

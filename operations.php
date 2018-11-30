@@ -11,39 +11,39 @@ $password = '';
     <title>Document</title>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Libellé</th>
-                <th>Montant</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        try
-        {
-        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
-        $reponse = $pdo->query("SELECT * FROM users");
-        while ($donnees = $reponse->fetch()) {
-
-
+<button><a href="add-operations.php">Add-Opérations</a></button>
+<button><a href="index.php">Accueil</a></button>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Libellé</th>
+        <th>Montant</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    try
+    {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
+    $reponse = $pdo->query("SELECT * FROM users");
+    while ($donnees = $reponse->fetch()) {
         ?>
-            <tr>
-                <td><?php echo $donnees[id];?></td>
-                <td><?php echo $donnees[label];?></td>
-                <td><?php echo $donnees[montant];?></td>
-            </tr>
-            <?php }
-            $reponse->closeCursor();
-        ?>
-        </tbody>
-    </table>
+        <tr>
+            <td><?php echo $donnees['id'];?></td>
+            <td><?php echo $donnees['label'];?></td>
+            <td><?php echo $donnees['montant'];?></td>
+        </tr>
+    <?php }
+    $reponse->closeCursor();
+    ?>
+    </tbody>
+</table>
 </body>
 </html>
 <?php }
 catch (PDOException $pdoE)
-	{
-		echo 'PDO Exception: <br/>'.$pdoE->getMessage();
-	}
-	?>
+{
+    echo 'PDO Exception: <br/>'.$pdoE->getMessage();
+}
+?>
