@@ -104,11 +104,13 @@ $password = '';
         $reponse = $pdo->query("SELECT id, label, montant FROM users");
         while ($donnees = $reponse->fetch()) {
             $perso = new Personnage($donnees);
-            //var_dump($perso);
-            echo $perso->getId();
-            echo $perso->getLabel();
-            echo $perso->getMontant();
-        }
+            //var_dump($perso); ?>
+            <tr>
+                <td><?php echo $perso->getId(); ?></td>
+                <td><?php echo $perso->getLabel(); ?></td>
+                <td><?php echo $perso->getMontant(); ?></td>
+            </tr>
+        <?php }
             $reponse->closeCursor();
         ?>
         </tbody>
