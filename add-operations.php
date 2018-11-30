@@ -62,24 +62,26 @@ $password = '';
 
 $label=(isset($_POST["label"])) ? $_POST["label"]:false;
 $montant=(isset($_POST["montant"])) ? $_POST["montant"]:false;
-
-    try {
-        if (($label=="") || ($montant=="")) {
-            echo " Merci de remplir tous les champs";
-        } else {
-        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
-        //var_dump($pdo);
-        $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (:label, :montant);');
-        $stmt->bindParam(':label', $label, PDO::PARAM_STR);
-        $stmt->bindParam(':montant', $montant, PDO::PARAM_STR);
-        $stmt->execute(); }
-        //var_dump($stmt);
-    } catch (PDOException $e) {
-        //var_dump($e->getMessage());
-        var_dump("Vos identifiants de connexion à la base de données ne sont as corrects");
-    } finally {
-        $pdo = null;
+$sauv=(isset($_GET["sauv"])) ? $_GET["sauv"]:false;
+if ($sauv) {
+    if (($label != "") || ($montant != "")) {
+        echo " Merci de remplir tous les champs";
+    } else {
+        try {
+            $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $login, $password);
+            //var_dump($pdo);
+            $stmt = $pdo->prepare('INSERT INTO users (label, montant) VALUES (:label, :montant);');
+            $stmt->bindParam(':label', $label, PDO::PARAM_STR);
+            $stmt->bindParam(':montant', $montant, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            //var_dump($e->getMessage());
+            var_dump("Vos identifiants de connexion à la base de données ne sont as corrects");
+        } finally {
+            $pdo = null;
+        }
     }
+}
 
 ?><!doctype html>
 <html lang="an">
@@ -88,7 +90,7 @@ $montant=(isset($_POST["montant"])) ? $_POST["montant"]:false;
     <title>Add operations</title>
 </head>
 <body>
-<form method="post">
+<form method="post" action="add-operations.php?sauv=ok">
     <input type="text" name="label" placeholder="Label" value="" />
     <input type="text" name="montant" placeholder="Montant" value="" />
     <button type="submit" class="btn btn-primary mb-2">OK</button>
