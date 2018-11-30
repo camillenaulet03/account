@@ -82,21 +82,22 @@ $password = '';
 ?><!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Operation</title>
 </head>
 <body>
-<button><a href="add-operations.php">Add-Opérations</a></button>
-<button><a href="index.php">Accueil</a></button>
-    <table>
-        <thead>
+<button><a href="add-operations.php" class="badge badge-dark">Add-Opérations</a></button>
+<button><a href="index.php" class="badge badge-dark">Accueil</a></button>
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
                 <th>#</th>
                 <th>Libellé</th>
                 <th>Montant</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="thead-light">
         <?php
         try
         {
@@ -106,7 +107,7 @@ $password = '';
             $perso = new Personnage($donnees);
             //var_dump($perso); ?>
             <tr>
-                <td><?php echo $perso->getId(); ?></td>
+                <td class=""><?php echo $perso->getId(); ?></td>
                 <td><?php echo $perso->getLabel(); ?></td>
                 <td><?php echo $perso->getMontant(); ?></td>
             </tr>

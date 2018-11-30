@@ -1,59 +1,4 @@
-<?php session_start();
-class Transaction {
-    private $label;
-    private $montant;
-
-    public function setLabel($label)
-    {
-        $this->label = $label;
-    }
-    public function getLabel()
-    {
-        return $this->label;
-    }
-    public function setMontant($montant)
-    {
-        $this->montant = $montant;
-    }
-    public function getMontant()
-    {
-        return $this->montant;
-    }
-}
-
-class Account extends Transaction {
-    private $transactions;
-
-    public function setTransaction($transactions)
-    {
-        $this->transactions = $transactions;
-    }
-    public function getTransactions()
-    {
-        return $this->transactions;
-    }
-    public function addTransaction(Transaction $transaction) {
-        $this->transactions = $transaction;
-    }
-}
-
-class User extends Account {
-    private $accounts;
-
-    public function setAccounts($accounts)
-    {
-        $this->accounts = $accounts;
-    }
-    public function getAccounts()
-    {
-        return $this->accounts;
-    }
-}
-$transaction = new Transaction();
-$account = new Account();
-$account->addTransaction($transaction);
-//var_dump($account);
-
+<?php
 $host = 'localhost';
 $port = 3306;
 $database = 'test';
@@ -64,7 +9,7 @@ $label=(isset($_POST["label"])) ? $_POST["label"]:false;
 $montant=(isset($_POST["montant"])) ? $_POST["montant"]:false;
 $sauv=(isset($_GET["sauv"])) ? $_GET["sauv"]:false;
 if ($sauv) {
-    if (($label != "") || ($montant != "")) {
+    if (($label == "") || ($montant == "")) {
         echo " Merci de remplir tous les champs";
     } else {
         try {
@@ -79,25 +24,30 @@ if ($sauv) {
             var_dump("Vos identifiants de connexion à la base de données ne sont as corrects");
         } finally {
             $pdo = null;
+            header('Location: operations.php');
         }
     }
 }
-
 ?><!doctype html>
 <html lang="an">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Add operations</title>
 </head>
 <body>
 <form method="post" action="add-operations.php?sauv=ok">
-    <input type="text" name="label" placeholder="Label" value="" />
-    <input type="text" name="montant" placeholder="Montant" value="" />
-    <button type="submit" class="btn btn-primary mb-2">OK</button>
+    <table class="table">
+        <tr>
+            <td align="center"><input type="text" name="label" placeholder="Label" value="" /></td>
+        </tr>
+        <tr>
+            <td align="center"><input type="number" name="montant" placeholder="Montant" value="" /></td>
+        </tr>
+        <tr>
+            <td align="center"><button type="submit" class="btn btn-primary mb-2">0K</button></td>
+        </tr>
+    </table>
 </form>
-<table>
-    <tbody>
-    </tbody>
-</table>
 </body>
 </html>
